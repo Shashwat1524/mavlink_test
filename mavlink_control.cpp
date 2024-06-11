@@ -67,8 +67,8 @@ void commands(Autopilot_Interface &api, bool autotakeoff)
 	}
 	api.update_setpoint(sp);
 	for (int i=0; i < 8; i++)
-	{
-		 pos = api.current_messages.local_position_ned;
+	{	
+		mavlink_local_position_ned_t pos = api.current_messages.local_position_ned;
 		printf("%i CURRENT POSITION XYZ = [ % .4f , % .4f , % .4f ] \n", i, pos.x, pos.y, pos.z);
 		sleep(1);
 	}
@@ -113,7 +113,7 @@ void commands(Autopilot_Interface &api, bool autotakeoff)
 		//printf("\n");
 		//api.arm_disarm(false);
 		//usleep(100);
-	}
+	
 	api.disable_offboard_control();
 	printf("READ SOME MESSAGES \n");
 
@@ -236,7 +236,7 @@ void quit_handler( int sig )
 }
 
 int main(int argc, char **argv)
-{
+{	
 	try
 	{
 		int result = top(argc,argv);
