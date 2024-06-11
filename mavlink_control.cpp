@@ -58,7 +58,7 @@ void commands(Autopilot_Interface &api, bool autotakeoff)
 				 ip.z, // [m]
 				 sp);
 
-	set_yaw(ip.r + 90.0/180.0*M_PI, // [rad]
+	set_yaw(ip.yaw + 90.0/180.0*M_PI, // [rad]
 			sp);			  
 
 	if(autotakeoff)
