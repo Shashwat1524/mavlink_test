@@ -380,7 +380,7 @@ void Autopilot_Interface::start()
 	initial_position.vx       = local_data.local_position_ned.vx;
 	initial_position.vy       = local_data.local_position_ned.vy;
 	initial_position.vz       = local_data.local_position_ned.vz;
-	initial_position.yaw      = local_data.control.yaw;
+	initial_position.yaw      = local_data.control.r;
 	initial_position.yaw_rate = local_data.attitude.yawspeed;
 	//intial_position.roll      = local_data.attittude.roll;
 	//initial_position.pitch    = local_data.attitude.roll;
