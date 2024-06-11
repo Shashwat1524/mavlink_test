@@ -89,5 +89,3 @@ public:
 
 
 #endif // GENERIC_PORT_H_
-
-
