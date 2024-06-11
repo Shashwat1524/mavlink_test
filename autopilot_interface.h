@@ -42,7 +42,7 @@
 #define MAVLINK_MSG_SET_POSITION_TARGET_LOCAL_NED_IDLE         0x4000
 
 uint64_t get_time_usec();
-void set_position(float x, float y, float z, float r, mavlink_set_position_target_local_ned_t &sp);
+void set_position(float x, float y, float z, MAVLINK_MSG_SET_POSITION_TARGET_LOCAL_NED_POSITION &sp);
 void set_velocity(float vx, float vy, float vz, mavlink_set_position_target_local_ned_t &sp);
 void set_acceleration(float ax, float ay, float az, mavlink_set_position_target_local_ned_t &sp);
 void set_yaw(float yaw, mavlink_set_position_target_local_ned_t &sp);
@@ -67,6 +67,7 @@ struct Time_Stamps
 	uint64_t position_target_global_int;
 	uint64_t highres_imu;
 	uint64_t attitude;
+	uint128_t control;
 
 	void
 	reset_timestamps()
@@ -81,6 +82,7 @@ struct Time_Stamps
 		position_target_global_int = 0;
 		highres_imu = 0;
 		attitude = 0;
+		control=0;
 	}
 };
 
@@ -99,6 +101,7 @@ struct Mavlink_Messages {
 	mavlink_position_target_global_int_t position_target_global_int;
 	mavlink_highres_imu_t highres_imu;
 	mavlink_attitude_t attitude;
+	mavlink_manual_control_t control;
 
 	Time_Stamps time_stamps; //Periodically Checked
 
@@ -127,7 +130,6 @@ class Autopilot_Interface{
 	int y;
 	int z;
 	int r;
-
 	Mavlink_Messages current_messages;
 	mavlink_set_position_target_local_ned_t initial_position;
 
@@ -138,7 +140,7 @@ class Autopilot_Interface{
 	int	 arm_disarm(bool flag);
 	void enable_offboard_control();
 	void disable_offboard_control();
-	int move_control(uint16_t x, uint16_t y, uint16_t z, uint16_t buttons, bool flag);
+	//int move_control(uint16_t x, uint16_t y, uint16_t z, uint16_t r, uint16_t buttons, bool flag);
 
 	void start();
 	void stop();

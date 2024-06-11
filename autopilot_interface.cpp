@@ -193,6 +193,14 @@ void Autopilot_Interface::read_messages()
 					this_timestamps.attitude = current_messages.time_stamps.attitude;
 					break;
 				}
+				case MAVLINK_MSG_ID_MANUAL_CONTROL:
+				{
+					printf("MAVLINK_MSG_ID_MANUAL_CONTROL\n");
+					mavlink_msg_attitude_decode(&message, &(current_messages.attitude));
+					current_messages.time_stamps.attitude = get_time_usec();
+					this_timestamps.attitude = current_messages.time_stamps.attitude;
+					break;
+				}
 
 				default:
 				{
@@ -287,7 +295,7 @@ int Autopilot_Interface::arm_disarm( bool flag )
 	int len = port->write_message(message);
 	return len;
 }
-int Autopilot_Interface::move_control(uint16_t x, uint16_t y, uint16_t z, uint16_t buttons, bool flag)
+int Autopilot_Interface::move_control(uint16_t x, uint16_t y, uint16_t z, uint16_t r, uint16_t buttons, bool flag)
 {
 	if(flag)
 	{
@@ -301,7 +309,8 @@ int Autopilot_Interface::move_control(uint16_t x, uint16_t y, uint16_t z, uint16
 	    com.param2           = x;
 	    com.param3           = y;
 	    com.param4           = z;
-	    com.param5           = buttons;
+		com.param5           = r;
+	    com.param6           = buttons;
 	    mavlink_message_t message;
 	    mavlink_msg_command_long_encode(system_id, companion_id, &message, &com);
 	    int len = port->write_message(message);
@@ -358,20 +367,20 @@ void Autopilot_Interface::start()
 		printf("GOT AUTOPILOT COMPONENT ID: %i\n", autopilot_id);
 		printf("\n");
 	}
-	while (not(current_messages.time_stamps.local_position_ned && current_messages.time_stamps.attitude))
+	while (not(current_messages.time_stamps.control && current_messages.time_stamps.attitude))
 	{
 		if (time_to_exit)
 			return;
 		usleep(500000);
 	}
 	Mavlink_Messages local_data = current_messages;
-	initial_position.x        = local_data.manual_control.x;
-	initial_position.y        = local_data.local_position_ned.y;
-	initial_position.z        = local_data.local_position_ned.z;
+	initial_position.x        = local_data.control.x;
+	initial_position.y        = local_data.control.y;
+	initial_position.z        = local_data.control.z;
 	initial_position.vx       = local_data.local_position_ned.vx;
 	initial_position.vy       = local_data.local_position_ned.vy;
 	initial_position.vz       = local_data.local_position_ned.vz;
-	initial_position.yaw      = local_data.attitude.yaw;
+	initial_position.yaw      = local_data.control.yaw;
 	initial_position.yaw_rate = local_data.attitude.yawspeed;
 	//intial_position.roll      = local_data.attittude.roll;
 	//initial_position.pitch    = local_data.attitude.roll;
