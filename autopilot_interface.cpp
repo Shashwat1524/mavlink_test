@@ -365,7 +365,7 @@ void Autopilot_Interface::start()
 		usleep(500000);
 	}
 	Mavlink_Messages local_data = current_messages;
-	initial_position.x        = local_data.local_position_ned.x;
+	initial_position.x        = local_data.manual_control.x;
 	initial_position.y        = local_data.local_position_ned.y;
 	initial_position.z        = local_data.local_position_ned.z;
 	initial_position.vx       = local_data.local_position_ned.vx;

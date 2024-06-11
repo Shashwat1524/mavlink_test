@@ -51,13 +51,12 @@ void commands(Autopilot_Interface &api, bool autotakeoff)
 	cout<<"SEND OFFBOARD COMMANDS\n";
 
 	mavlink_set_position_target_local_ned_t sp;
-	mavlink_set_position_target_local_ned_t ip = api.MANUAL_CONTROL;
+	mavlink_set_position_target_local_ned_t ip = api.initial_position;
 
 	// Example 1 - Fly up by to 2m
 	set_position( ip.x ,       // [m]
 			 	  ip.y ,       // [m]
 				  ip.z ,       // [m]
-				  ip.r ,       // [m]
 				  sp         );
 
 	if(autotakeoff)
