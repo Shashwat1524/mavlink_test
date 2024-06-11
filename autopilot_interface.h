@@ -67,7 +67,7 @@ struct Time_Stamps
 	uint64_t position_target_global_int;
 	uint64_t highres_imu;
 	uint64_t attitude;
-	uint128_t control;
+	uint64_t control;
 
 	void
 	reset_timestamps()
@@ -140,7 +140,7 @@ class Autopilot_Interface{
 	int	 arm_disarm(bool flag);
 	void enable_offboard_control();
 	void disable_offboard_control();
-	//int move_control(uint16_t x, uint16_t y, uint16_t z, uint16_t r, uint16_t buttons, bool flag);
+	int move_control(uint16_t x, uint16_t y, uint16_t z, uint16_t r, uint16_t buttons, bool flag);
 
 	void start();
 	void stop();
