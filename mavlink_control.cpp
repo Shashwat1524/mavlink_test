@@ -21,16 +21,20 @@ int top (int argc, char **argv)
 	else
 	{
 		port = new Serial_Port(uart_name, baudrate);
+		
 	}
 
 	Autopilot_Interface autopilot_interface(port);
 
 	port_quit = port;
 	autopilot_interface_quit = &autopilot_interface;
+	
 	signal(SIGINT,quit_handler);
-
+	
 	port->start();
+	
 	autopilot_interface.start();
+	
 	commands(autopilot_interface, autotakeoff);
 	autopilot_interface.stop();
 	port->stop();
