@@ -35,7 +35,7 @@ void set_velocity(float vx, float vy, float vz,mavlink_set_position_target_local
 }
 void set_acceleration(float ax, float ay, float az, mavlink_set_position_target_local_ned_t &sp)
 {
-	sp.type_mask=MAVLINK_MSG_SET_POSITION_TARGET_LOCAL_NED_ACCELERATION && MAVLINK_MSG_SET_POSITION_TARGET_LOCAL_NED_VELOCITY;
+	sp.type_mask=MAVLINK_MSG_SET_POSITION_TARGET_LOCAL_NED_ACCELERATION & MAVLINK_MSG_SET_POSITION_TARGET_LOCAL_NED_VELOCITY;
 	sp.coordinate_frame = MAV_FRAME_LOCAL_NED;
 	sp.afx   = ax;
 	sp.afy   = ay;
@@ -291,6 +291,10 @@ void Autopilot_Interface::disable_offboard_control()
 			fprintf(stderr,"Error: off-board mode not set, could not write message\n");
 		}
 		printf("\n");
+	}
+	else
+	{
+		printf("Cannot Enter");
 	}
 
 }

@@ -1,5 +1,4 @@
 #include "mavlink_control.h"
-//
 int top (int argc, char **argv)
 {
     #ifdef __APPLE__
@@ -42,6 +41,7 @@ int top (int argc, char **argv)
 
 void commands(Autopilot_Interface &api, bool autotakeoff)
 {
+	printf("Commands Entered");
 	api.enable_offboard_control();
 	usleep(100);
 	if(autotakeoff)
