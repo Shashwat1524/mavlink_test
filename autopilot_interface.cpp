@@ -217,13 +217,14 @@ void Autopilot_Interface::read_messages()
 					break;
 				}
 			}
-		}
+	
 		received_all=(this_timestamps.heartbeat && this_timestamps.sys_status);
         if (writing_status>false)
         {
             usleep(100); //Switches Off
         }
 	    return;
+		}
 	}	
 }
 // Write Messages
