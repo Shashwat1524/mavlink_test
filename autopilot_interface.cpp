@@ -108,7 +108,7 @@ void Autopilot_Interface::read_messages()
 	{
         mavlink_message_t message;
 		success = port->read_message(message);
-        if (success==true)
+        if (success)
         {
             current_messages.sysid  = message.sysid;
 			current_messages.compid = message.compid;
@@ -215,7 +215,6 @@ void Autopilot_Interface::read_messages()
 					//printf("No message id %i\n",message.msgid);
 					break;
 				}
-				break;
 			}
 		}
     }
