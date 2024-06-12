@@ -11,6 +11,12 @@ void set_position(float x, float y, float z, mavlink_set_position_target_local_n
 {
 	sp.type_mask=MAVLINK_MSG_SET_POSITION_TARGET_LOCAL_NED_POSITION;
 	sp.coordinate_frame = MAV_FRAME_LOCAL_NED;
+	printf("Give x:");
+	scanf("%f",&x);
+	printf("Give y:");
+	scanf("%f",&y);
+	printf("Give z:");
+	scanf("%f",&z);
 	sp.x   = x;
 	sp.y   = y;
 	sp.z   = z;
@@ -38,6 +44,8 @@ void set_acceleration(float ax, float ay, float az, mavlink_set_position_target_
 void set_yaw(float yaw, mavlink_set_position_target_local_ned_t &sp)
 {
 	sp.type_mask=sp.type_mask & MAVLINK_MSG_SET_POSITION_TARGET_LOCAL_NED_YAW_ANGLE;
+	printf("Give yaw:");
+	scanf("%f",&yaw);
 	sp.yaw=yaw;
 	printf("POSITION SETPOINT YAW = %.4f\n",sp.yaw);
 }
