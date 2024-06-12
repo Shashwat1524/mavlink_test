@@ -327,6 +327,7 @@ int Autopilot_Interface::move_control(uint16_t x, uint16_t y, uint16_t z, uint16
 	else
 	{
 		printf("MANUAL CONTROL DISABLED\n");
+		return 0;
 	}
 }
 int Autopilot_Interface:: toggle_offboard_control( bool flag )
