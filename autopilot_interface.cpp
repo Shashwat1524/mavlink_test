@@ -5,7 +5,7 @@ uint64_t get_time_usec()
 {
 	static struct timeval _time_stamp;
 	gettimeofday(&_time_stamp, NULL);
-	return _time_stamp.tv_sec*1000000 +_time_stamp.tv_usec;
+	return ((_time_stamp.tv_sec*1000000) +_time_stamp.tv_usec);
 }
 
 void set_position(float x, float y, float z, mavlink_set_position_target_local_ned_t &sp)
@@ -35,7 +35,7 @@ void set_velocity(float vx, float vy, float vz,mavlink_set_position_target_local
 }
 void set_acceleration(float ax, float ay, float az, mavlink_set_position_target_local_ned_t &sp)
 {
-	sp.type_mask=MAVLINK_MSG_SET_POSITION_TARGET_LOCAL_NED_ACCELERATION;
+	sp.type_mask=MAVLINK_MSG_SET_POSITION_TARGET_LOCAL_NED_ACCELERATION & MAVLINK_MSG_SET_POSITION_TARGET_LOCAL_NED_VELOCITY;
 	sp.coordinate_frame = MAV_FRAME_LOCAL_NED;
 	sp.afx   = ax;
 	sp.afy   = ay;
@@ -109,7 +109,7 @@ void Autopilot_Interface::read_messages()
 	{
         mavlink_message_t message;
 		success = port->read_message(message);
-        if (success)
+        if (success==true)
         {
             current_messages.sysid  = message.sysid;
 			current_messages.compid = message.compid;
@@ -217,14 +217,26 @@ void Autopilot_Interface::read_messages()
 					break;
 				}
 			}
-		}	
-		received_all=(this_timestamps.heartbeat && this_timestamps.sys_status);
-        if (writing_status>false)
+		}
+		received_all =
+				this_timestamps.heartbeat                  &&
+//				this_timestamps.battery_status             &&
+//				this_timestamps.radio_status               &&
+//				this_timestamps.local_position_ned         &&
+//				this_timestamps.global_position_int        &&
+//				this_timestamps.position_target_local_ned  &&
+//				this_timestamps.position_target_global_int &&
+//				this_timestamps.highres_imu                &&
+//				this_timestamps.attitude                   &&
+				this_timestamps.sys_status;
+	        if (writing_status > false)
         {
             usleep(100); //Switches Off
         }
-	}	
+	}
+	return;	
 }
+
 // Write Messages
 int Autopilot_Interface::write_message(mavlink_message_t message)
 {
@@ -306,7 +318,6 @@ int Autopilot_Interface::arm_disarm( bool flag )
 }
 int Autopilot_Interface::move_control(uint16_t x, uint16_t y, uint16_t z, uint16_t r, uint16_t buttons, bool flag)
 {
-	int len = true;
 	if(flag)
 	{
 		printf("MANUAL CONTROL ENABLED\n");
@@ -323,7 +334,7 @@ int Autopilot_Interface::move_control(uint16_t x, uint16_t y, uint16_t z, uint16
 	    com.param6           = buttons;
 	    mavlink_message_t message;
 	    mavlink_msg_command_long_encode(system_id, companion_id, &message, &com);
-	    len = port->write_message(message);
+	    int len = port->write_message(message);
 		return len;
 	}
 	else
