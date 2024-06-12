@@ -305,6 +305,7 @@ int Autopilot_Interface::arm_disarm( bool flag )
 }
 int Autopilot_Interface::move_control(uint16_t x, uint16_t y, uint16_t z, uint16_t r, uint16_t buttons, bool flag)
 {
+	int len = 0;
 	if(flag)
 	{
 		printf("MANUAL CONTROL ENABLED\n");
@@ -322,12 +323,12 @@ int Autopilot_Interface::move_control(uint16_t x, uint16_t y, uint16_t z, uint16
 	    mavlink_message_t message;
 	    mavlink_msg_command_long_encode(system_id, companion_id, &message, &com);
 	    int len = port->write_message(message);
-	    return len;
 	}
 	else
 	{
 		printf("MANUAL CONTROL DISABLED\n");
 	}
+	return len;
 }
 int Autopilot_Interface:: toggle_offboard_control( bool flag )
 {
