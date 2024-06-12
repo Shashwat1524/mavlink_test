@@ -35,7 +35,9 @@ int top (int argc, char **argv)
 	
 	autopilot_interface.start();
 	
+	
 	commands(autopilot_interface, autotakeoff);
+	
 	autopilot_interface.stop();
 	port->stop();
 	delete port;
@@ -71,12 +73,14 @@ void commands(Autopilot_Interface &api, bool autotakeoff)
 		sp.type_mask |= MAVLINK_MSG_SET_POSITION_TARGET_LOCAL_NED_TAKEOFF;
 	}
 	api.update_setpoint(sp);
-	for (int i=0; i < 8; i++)
+	while(true)
 	{	
 		mavlink_local_position_ned_t pos = api.current_messages.local_position_ned;
-		printf("%i CURRENT POSITION XYZ = [ % .4f , % .4f , % .4f ] \n", i, pos.x, pos.y, pos.z);
-		sleep(1);
-	}
+		printf("CURRENT POSITION XYZ = [ % .4f , % .4f , % .4f ] \n", pos.x, pos.y, pos.z);
+		
+		
+
+	
 	// Example 2 - Set Velocity
 	//set_velocity( -1.0       , // [m/s]
 	//			  -1.0       , // [m/s]
@@ -120,12 +124,13 @@ void commands(Autopilot_Interface &api, bool autotakeoff)
 		//usleep(100);
 	
 	api.disable_offboard_control();
-	printf("READ SOME MESSAGES \n");
-
+	// printf("READ SOME MESSAGES \n");
+	
+	
 	Mavlink_Messages messages = api.current_messages;
 
 	// local position in ned frame
-	mavlink_local_position_ned_t pos = messages.local_position_ned;
+	
 	printf("Got message LOCAL_POSITION_NED\n");
 	printf("Position  (NED):  %f %f %f (m)\n", pos.x, pos.y, pos.z );
 
@@ -141,6 +146,7 @@ void commands(Autopilot_Interface &api, bool autotakeoff)
 	printf("Temperature: %f C \n",imu.temperature );
     printf("\n");
 
+	
     mavlink_attitude_t attitude = messages.attitude;
     printf("Got message ATTITUDE\n");
     printf("Roll: %f (rad)", attitude.roll);
@@ -150,7 +156,10 @@ void commands(Autopilot_Interface &api, bool autotakeoff)
     printf("Yaw Speed: %f (rad/s)",attitude.yawspeed);
     printf("Pitch Speed: %f (rad/s)",attitude.pitchspeed);
     printf("\n");
+	sleep(1);
+	}
 	return;
+	
 }
 
 void parse_commandline(int argc, char **argv, char *&uart_name, int &baudrate, bool &use_udp, char *&udp_ip, int &udp_port, bool &autotakeoff)
