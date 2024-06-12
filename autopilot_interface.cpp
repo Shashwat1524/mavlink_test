@@ -322,7 +322,7 @@ int Autopilot_Interface::move_control(uint16_t x, uint16_t y, uint16_t z, uint16
 	    com.param6           = buttons;
 	    mavlink_message_t message;
 	    mavlink_msg_command_long_encode(system_id, companion_id, &message, &com);
-	    int len = port->write_message(message);
+	    len = port->write_message(message);
 	}
 	else
 	{
