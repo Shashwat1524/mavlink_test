@@ -216,7 +216,9 @@ void Autopilot_Interface::read_messages()
 					break;
 				}
 			}
+			print("H");
 		}
+		print("i");
     }
     received_all=this_timestamps.heartbeat && this_timestamps.sys_status;
     if (writing_status>false)
