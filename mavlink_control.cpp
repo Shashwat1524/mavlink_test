@@ -131,24 +131,24 @@ void commands(Autopilot_Interface &api, bool autotakeoff)
 
 	// local position in ned frame
 	
-	printf("Got message LOCAL_POSITION_NED\n");
+	// printf("Got message LOCAL_POSITION_NED\n");
 	printf("Position  (NED):  %f %f %f (m)\n", pos.x, pos.y, pos.z );
 
 	// hires imu
-	mavlink_highres_imu_t imu = messages.highres_imu;
-	printf("Got message HIGHRES_IMU\n");
-	printf("Time (Since Boot):     %lu \n", imu.time_usec);
-	printf("Accelerometer  (NED):  % f % f % f (m/s^2)\n", imu.xacc , imu.yacc , imu.zacc );
-	printf("Gyroscope (NED):  % f % f % f (rad/s)\n", imu.xgyro, imu.ygyro, imu.zgyro);
-	printf("Mag  (NED):  % f % f % f (Ga)\n", imu.xmag , imu.ymag , imu.zmag );
-	printf("Barometer:        %f (mBar) \n",imu.abs_pressure);
-	printf("Altitude:    %f (m) \n",imu.pressure_alt);
-	printf("Temperature: %f C \n",imu.temperature );
-    printf("\n");
+	// mavlink_highres_imu_t imu = messages.highres_imu;
+	// printf("Got message HIGHRES_IMU\n");
+	// printf("Time (Since Boot):     %lu \n", imu.time_usec);
+	// printf("Accelerometer  (NED):  % f % f % f (m/s^2)\n", imu.xacc , imu.yacc , imu.zacc );
+	// printf("Gyroscope (NED):  % f % f % f (rad/s)\n", imu.xgyro, imu.ygyro, imu.zgyro);
+	// printf("Mag  (NED):  % f % f % f (Ga)\n", imu.xmag , imu.ymag , imu.zmag );
+	// printf("Barometer:        %f (mBar) \n",imu.abs_pressure);
+	// printf("Altitude:    %f (m) \n",imu.pressure_alt);
+	// printf("Temperature: %f C \n",imu.temperature );
+    // printf("\n");
 
 	
     mavlink_attitude_t attitude = messages.attitude;
-    printf("Got message ATTITUDE\n");
+    // printf("Got message ATTITUDE\n");
     printf("Roll: %f (rad)", attitude.roll);
     printf("Yaw: %f (rad)", attitude.yaw);
     printf("Pitch: %f (rad)", attitude.pitch);
