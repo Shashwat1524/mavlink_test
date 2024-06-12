@@ -212,7 +212,7 @@ void Autopilot_Interface::read_messages()
 
 				default:
 				{
-					printf("No message id %i\n",message.msgid);
+					//printf("No message id %i\n",message.msgid);
 					break;
 				}
 			}
