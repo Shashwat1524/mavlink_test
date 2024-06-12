@@ -48,7 +48,7 @@ void commands(Autopilot_Interface &api, bool autotakeoff)
 		api.arm_disarm(true);
 		usleep(100);
 	}
-	cout<<"SEND OFFBOARD COMMANDS\n";
+	printf("SEND OFFBOARD COMMANDS\n");
 	mavlink_set_position_target_local_ned_t sp;
 	mavlink_set_position_target_local_ned_t ip = api.initial_position;
 
@@ -233,6 +233,7 @@ void quit_handler( int sig )
 		port_quit->stop();
 	}
 	catch (int error){}
+	exit(0);
 }
 
 int main(int argc, char **argv)

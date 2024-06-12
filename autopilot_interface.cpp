@@ -1,10 +1,9 @@
 #include "autopilot_interface.h"
-#include <common/mavlink.h>
 uint64_t get_time_usec()
 {
 	static struct timeval _time_stamp;
 	gettimeofday(&_time_stamp, NULL);
-	return ((_time_stamp.tv_sec*1000000) +(_time_stamp.tv_usec));
+	return _time_stamp.tv_sec*1000000 +_time_stamp.tv_usec;
 }
 
 void set_position(float x, float y, float z, mavlink_set_position_target_local_ned_t &sp)
@@ -217,7 +216,7 @@ void Autopilot_Interface::read_messages()
 				}
 			}
 		}
-		received_all=(this_timestamps.heartbeat && this_timestamps.sys_status);
+		received_all=(this_timestamps.heartbeat & this_timestamps.sys_status);
         if (writing_status>false)
         {
             usleep(100); //Switches Off
