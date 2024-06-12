@@ -392,12 +392,14 @@ void Autopilot_Interface::start()
 		printf("GOT AUTOPILOT COMPONENT ID: %i\n", autopilot_id);
 		printf("\n");
 	}
-	while (not(current_messages.time_stamps.control && current_messages.time_stamps.attitude))
-	{
+	
+	while (not(current_messages.time_stamps.local_position_ned && current_messages.time_stamps.attitude))
+	{	
 		if (time_to_exit)
 			return;
 		usleep(500000);
 	}
+	
 	Mavlink_Messages local_data = current_messages;
 	initial_position.x        = local_data.control.x;
 	initial_position.y        = local_data.control.y;
