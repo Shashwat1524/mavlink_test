@@ -105,7 +105,7 @@ void Autopilot_Interface::read_messages()
 	bool success;
 	bool received_all = false;
 	Time_Stamps this_timestamps;
-	while (!received_all and !time_to_exit )
+	//while (!received_all and !time_to_exit )
 	{
         mavlink_message_t message;
 		success = port->read_message(message);
@@ -217,7 +217,6 @@ void Autopilot_Interface::read_messages()
 					break;
 				}
 			}
-	
 		received_all=(this_timestamps.heartbeat && this_timestamps.sys_status);
         if (writing_status>false)
         {
