@@ -215,6 +215,7 @@ void Autopilot_Interface::read_messages()
 					//printf("No message id %i\n",message.msgid);
 					break;
 				}
+				break;
 			}
 		}
     }
