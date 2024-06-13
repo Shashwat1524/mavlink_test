@@ -159,12 +159,13 @@ void commands(Autopilot_Interface &api, bool autotakeoff)
 
 	mavlink_get_attitude_battery_t custom = messages.custom;
     // printf("Got message ATTITUDE\n");
-    printf("Roll: %f (rad)", custom.roll);
-    printf("Yaw: %f (rad)", custom.yaw);
-    printf("Pitch: %f (rad)", custom.pitch);
-    printf("Current Battery: %d (cA)",custom.current_battery);
-    printf("Energy Consumed: %d (hJ)",custom.energy_consumed);
-    printf("Battery Remaining: %d (%)",custom.battery_remaining);
+	printf("Time (Since Boot):%lu \n", custom.time_boot_ms);
+    printf("Roll: %f (rad)\n", custom.roll);
+    printf("Yaw: %f (rad)\n", custom.yaw);
+    printf("Pitch: %f (rad)\n", custom.pitch);
+    printf("Current Battery: %d (cA)\n",custom.current_battery);
+    printf("Energy Consumed: %d (hJ)\n",custom.energy_consumed);
+    printf("Battery Remaining: %d (%)\n",custom.battery_remaining);
     printf("\n");
 	sleep(1);
 	}
