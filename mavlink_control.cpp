@@ -146,7 +146,6 @@ void commands(Autopilot_Interface &api, bool autotakeoff)
 	// printf("Temperature: %f C \n",imu.temperature );
     // printf("\n");
 
-	
     mavlink_attitude_t attitude = messages.attitude;
     // printf("Got message ATTITUDE\n");
     printf("Roll: %f (rad)", attitude.roll);
