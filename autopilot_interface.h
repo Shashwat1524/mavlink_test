@@ -68,6 +68,7 @@ struct Time_Stamps
 	uint64_t highres_imu;
 	uint64_t attitude;
 	uint64_t control;
+	uint64_t custom;
 
 	void
 	reset_timestamps()
@@ -83,6 +84,7 @@ struct Time_Stamps
 		highres_imu = 0;
 		attitude = 0;
 		control=0;
+		custom=0;
 	}
 };
 
@@ -102,6 +104,7 @@ struct Mavlink_Messages {
 	mavlink_highres_imu_t highres_imu;
 	mavlink_attitude_t attitude;
 	mavlink_manual_control_t control;
+	mavlink_get_attitude_battery_t custom;
 
 	Time_Stamps time_stamps; //Periodically Checked
 

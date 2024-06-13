@@ -146,14 +146,25 @@ void commands(Autopilot_Interface &api, bool autotakeoff)
 	// printf("Temperature: %f C \n",imu.temperature );
     // printf("\n");
 
-    mavlink_attitude_t attitude = messages.attitude;
+    // mavlink_attitude_t attitude = messages.attitude;
+    // // printf("Got message ATTITUDE\n");
+    // printf("Roll: %f (rad)", attitude.roll);
+    // printf("Yaw: %f (rad)", attitude.yaw);
+    // printf("Pitch: %f (rad)", attitude.pitch);
+    // printf("Roll Speed: %f (rad/s)",attitude.rollspeed);
+    // printf("Yaw Speed: %f (rad/s)",attitude.yawspeed);
+    // printf("Pitch Speed: %f (rad/s)",attitude.pitchspeed);
+    // printf("\n");
+	// sleep(1);
+
+	mavlink_get_attitude_battery_t custom = messages.cutsom;
     // printf("Got message ATTITUDE\n");
-    printf("Roll: %f (rad)", attitude.roll);
-    printf("Yaw: %f (rad)", attitude.yaw);
-    printf("Pitch: %f (rad)", attitude.pitch);
-    printf("Roll Speed: %f (rad/s)",attitude.rollspeed);
-    printf("Yaw Speed: %f (rad/s)",attitude.yawspeed);
-    printf("Pitch Speed: %f (rad/s)",attitude.pitchspeed);
+    printf("Roll: %f (rad)", custom.roll);
+    printf("Yaw: %f (rad)", custom.yaw);
+    printf("Pitch: %f (rad)", custom.pitch);
+    printf("Current Battery: %f (cA)",custom.current_battery);
+    printf("Energy Consumed: %f (hJ)",custom.energy_consumed);
+    printf("Battery Remaining: %f (%)",custom.battery_remaining);
     printf("\n");
 	sleep(1);
 	}
