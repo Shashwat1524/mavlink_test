@@ -62,7 +62,7 @@
 #include <pthread.h> // This uses POSIX Threads
 #include <signal.h>
 
-#include <common/mavlink.h>
+#include <your_custom_dialect/mavlink.h>
 
 #include "generic_port.h"
 

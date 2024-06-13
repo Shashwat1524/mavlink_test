@@ -13,7 +13,7 @@
 using std::string;
 using namespace std;
 
-#include <common/mavlink.h>
+#include <your_custom_dialect/mavlink.h>
 #include "autopilot_interface.h"
 #include "serial_port.h"
 #include "udp_port.h"

@@ -1,5 +1,5 @@
 #include "autopilot_interface.h"
-#include <common/mavlink.h>
+#include <your_custom_dialect/mavlink.h>
 
 uint64_t get_time_usec()
 {

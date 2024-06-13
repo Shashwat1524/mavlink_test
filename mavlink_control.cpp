@@ -162,9 +162,9 @@ void commands(Autopilot_Interface &api, bool autotakeoff)
     printf("Roll: %f (rad)", custom.roll);
     printf("Yaw: %f (rad)", custom.yaw);
     printf("Pitch: %f (rad)", custom.pitch);
-    printf("Current Battery: %f (cA)",custom.current_battery);
-    printf("Energy Consumed: %f (hJ)",custom.energy_consumed);
-    printf("Battery Remaining: %f (%)",custom.battery_remaining);
+    printf("Current Battery: %d (cA)",custom.current_battery);
+    printf("Energy Consumed: %d (hJ)",custom.energy_consumed);
+    printf("Battery Remaining: %d (%)",custom.battery_remaining);
     printf("\n");
 	sleep(1);
 	}

@@ -9,7 +9,7 @@
 #include <unistd.h>  // UNIX standard function definitions
 #include <mutex>
 
-#include <common/mavlink.h>
+#include <your_custom_dialect/mavlink.h>
  //Mapping:
  //bit 1: x,
  //bit 2: y,
