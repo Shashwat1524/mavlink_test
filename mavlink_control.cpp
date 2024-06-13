@@ -157,7 +157,7 @@ void commands(Autopilot_Interface &api, bool autotakeoff)
     // printf("\n");
 	// sleep(1);
 
-	mavlink_get_attitude_battery_t custom = messages.cutsom;
+	mavlink_get_attitude_battery_t custom = messages.custom;
     // printf("Got message ATTITUDE\n");
     printf("Roll: %f (rad)", custom.roll);
     printf("Yaw: %f (rad)", custom.yaw);

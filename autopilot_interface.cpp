@@ -214,8 +214,8 @@ void Autopilot_Interface::read_messages()
 				{
 					//printf("MAVLINK_MSG_ID_GET_ATTITUDE_BATTERY\n");
 					mavlink_msg_attitude_decode(&message, &(current_messages.attitude));
-					current_messages.time_stamps.attitude = get_time_usec();
-					this_timestamps.attitude = current_messages.time_stamps.attitude;
+					current_messages.time_stamps.custom = get_time_usec();
+					this_timestamps.custom = current_messages.time_stamps.custom;
 					break;
 				}
 
