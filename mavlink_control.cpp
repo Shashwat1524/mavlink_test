@@ -146,7 +146,7 @@ void commands(Autopilot_Interface &api, bool autotakeoff)
 	// printf("Temperature: %f C \n",imu.temperature );
     // printf("\n");
 
-    // mavlink_attitude_t attitude = messages.attitude;
+    mavlink_attitude_t attitude = messages.attitude;
     // // printf("Got message ATTITUDE\n");
     // printf("Roll: %f (rad)", attitude.roll);
     // printf("Yaw: %f (rad)", attitude.yaw);
@@ -157,7 +157,16 @@ void commands(Autopilot_Interface &api, bool autotakeoff)
     // printf("\n");
 	// sleep(1);
 
+	
+
 	mavlink_get_attitude_battery_t custom = messages.custom;
+	mavlink_battery_status_t battery_status = messages.battery_status;
+	custom.roll=attitude.roll;
+	custom.pitch=attitude.pitch;
+	custom.yaw=attitude.yaw;
+	custom.current_battery= battery_status.current_battery;
+	custom.energy_consumed= battery_status.energy_consumed;
+	custom.battery_remaining= battery_status.battery_remaining;
     // printf("Got message ATTITUDE\n");
 	printf("Time (Since Boot):%lu \n", custom.time_boot_ms);
     printf("Roll: %f (rad)\n", custom.roll);
